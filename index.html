@@ -1,0 +1,192 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TouchGrass AI | Find Your Outside</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f7ee;
+      color: #203b2a;
+    }
+
+    header {
+      padding: 24px 8%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo { font-size: 22px; font-weight: bold; }
+    .tag { color: #55745a; font-size: 14px; }
+
+    main {
+      max-width: 760px;
+      margin: 35px auto;
+      padding: 20px;
+    }
+
+    .hero { text-align: center; margin-bottom: 30px; }
+
+    h1 {
+      font-size: clamp(36px, 7vw, 58px);
+      margin: 12px 0;
+      letter-spacing: -2px;
+    }
+
+    .hero p { color: #607563; line-height: 1.6; }
+
+    .card {
+      background: white;
+      border-radius: 22px;
+      padding: 28px;
+      box-shadow: 0 10px 35px #203b2a12;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin: 18px 0 8px;
+    }
+
+    select, button {
+      width: 100%;
+      padding: 14px;
+      border-radius: 10px;
+      font-size: 16px;
+    }
+
+    select {
+      border: 1px solid #d5dfd0;
+      background: #fbfcf9;
+      color: #203b2a;
+    }
+
+    button {
+      margin-top: 24px;
+      background: #285c39;
+      color: white;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover { background: #194629; }
+
+    #result {
+      margin-top: 22px;
+      padding: 18px;
+      border-radius: 12px;
+      background: #edf5e8;
+      line-height: 1.7;
+      display: none;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      color: #71806f;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">🌿 TouchGrass AI</div>
+    <div class="tag">A little less scrolling</div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div style="font-size:48px">🌳 ☀️ 🍃</div>
+      <h1>Find your outside.</h1>
+      <p>A little fresh air can change your day.<br>
+      Tell us what you need, and find an outdoor activity.</p>
+    </section>
+
+    <section class="card">
+      <h2>Your outdoor reset</h2>
+      <p>Let's find something that fits your day.</p>
+
+      <label for="mood">How are you feeling?</label>
+      <select id="mood">
+        <option value="stressed">Stressed or overwhelmed</option>
+        <option value="low">Low on energy</option>
+        <option value="curious">Curious and adventurous</option>
+        <option value="social">Ready to meet people</option>
+      </select>
+
+      <label for="time">How much time do you have?</label>
+      <select id="time">
+        <option value="10">10 minutes</option>
+        <option value="30">30 minutes</option>
+        <option value="60">1 hour</option>
+      </select>
+
+      <label for="place">Where would you like to go?</label>
+      <select id="place">
+        <option value="park">A park or green space</option>
+        <option value="neighborhood">Around my neighborhood</option>
+        <option value="home">My garden or balcony</option>
+      </select>
+
+      <button id="suggestBtn">Find my outdoor activity →</button>
+      <div id="result" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <footer>
+    Built to help you reconnect with the world outside. 🌎
+  </footer>
+
+  <script>
+    const activities = {
+      stressed: {
+        title: "Take a mindful nature walk 🌿",
+        description: "Walk slowly, notice five things you can see, four sounds you can hear, and take a few comfortable breaths."
+      },
+      low: {
+        title: "Get a little sunlight ☀️",
+        description: "Step outside for a gentle 10-minute stroll or sit somewhere pleasant. Keep it easy and go at your own pace."
+      },
+      curious: {
+        title: "Become a nature detective 🔎",
+        description: "Look for three different leaves, listen for bird calls, or photograph an interesting plant near you."
+      },
+      social: {
+        title: "Make it a shared adventure 👫",
+        description: "Invite a friend for a walk, visit a community garden, or look for a local outdoor group."
+      }
+    };
+
+    document.getElementById("suggestBtn").addEventListener("click", () => {
+      const mood = document.getElementById("mood").value;
+      const time = document.getElementById("time").value;
+      const place = document.getElementById("place").value;
+      const activity = activities[mood];
+
+      const placeNames = {
+        park: "a nearby park or green space",
+        neighborhood: "your neighborhood",
+        home: "your garden or balcony"
+      };
+
+      const result = document.getElementById("result");
+      result.innerHTML = `
+        <h3>${activity.title}</h3>
+        <p>${activity.description}</p>
+        <p><strong>Your plan:</strong> Spend ${time} minutes around
+        ${placeNames[place]}.</p>
+        <p>🌱 Small steps count. Choose a safe, accessible spot and enjoy your break.</p>
+        <p><em>Demo suggestions for now — AI integration comes next.</em></p>
+      `;
+      result.style.display = "block";
+    });
+  </script>
+</body>
+</html>
